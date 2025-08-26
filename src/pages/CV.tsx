@@ -1,218 +1,225 @@
-import { Calendar, MapPin, Award, Code2, Server, Database } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Github, Linkedin, Mail, MapPin } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useState } from 'react';
 
 const CV = () => {
-  const skills = {
-    'Frontend': ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Vue.js', 'Tailwind CSS'],
-    'Backend': ['PHP', 'Laravel', 'Node.js', 'Python', 'MySQL', 'PostgreSQL', 'MongoDB', 'Redis'],
-    'DevOps': ['Docker', 'Kubernetes', 'CI/CD', 'Jenkins', 'GitHub Actions', 'AWS', 'Google Cloud', 'Terraform'],
-    'Tools': ['Git', 'Linux', 'Nginx', 'Apache', 'Monitoring', 'Logging', 'Security', 'Performance Optimization']
-  };
+  const [activeSection, setActiveSection] = useState('introduction');
 
-  const experience = [
+  const sections = [
+    { id: 'introduction', label: 'Introduction' },
+    { id: 'experience', label: 'Clients & Experiences' },
+    { id: 'studies', label: 'Studies' },
+    { id: 'skills', label: 'Technical skills' }
+  ];
+
+  const experiences = [
     {
-      title: 'Senior DevOps Engineer',
-      company: 'Tech Solutions Inc.',
-      location: 'Remote',
-      period: '2022 - Present',
+      company: 'ICOSNET',
+      period: '07/2024 - Present',
+      role: 'Development and Application Engineer',
       description: [
-        'Led infrastructure automation initiatives reducing deployment time by 70%',
-        'Implemented CI/CD pipelines for 15+ microservices using Docker and Kubernetes',
-        'Managed cloud infrastructure on AWS serving 1M+ daily users',
-        'Mentored junior developers on DevOps best practices'
+        'Develop, and maintain web applications using various frameworks, ensuring optimal performance and scalability.',
+        'Troubleshooting application issues, creating technical documentation and monitoring application performance.'
       ]
     },
     {
-      title: 'Full Stack Developer',
-      company: 'Digital Agency Pro',
-      location: 'New York, NY',
-      period: '2020 - 2022',
+      company: 'Apollo Digital Solutions',
+      period: '06/2024 - 07/2024', 
+      role: 'Fullstack developer',
       description: [
-        'Developed 20+ responsive web applications using React and Laravel',
-        'Optimized application performance resulting in 40% faster load times',
-        'Collaborated with design teams to implement pixel-perfect UIs',
-        'Integrated third-party APIs and payment gateways'
+        'Design and implement web applications by building server-side logic and APIs while creating responsive front-end interfaces.',
+        'Managing databases, optimizing performance, overseeing deployment, and collaborating with cross-functional teams to deliver high-quality software solutions.'
       ]
     },
     {
-      title: 'Web Developer',
-      company: 'StartupXYZ',
-      location: 'San Francisco, CA',
-      period: '2018 - 2020',
+      company: 'Remotely',
+      period: '2023 - present',
+      role: 'Full stack developer freelancer',
       description: [
-        'Built and maintained company website and internal tools',
-        'Implemented responsive designs for mobile-first approach',
-        'Set up monitoring and logging systems for production applications',
-        'Worked with cross-functional teams in Agile environment'
+        'Manage all aspects of my projects, including client communication, requirement gathering, and project scoping.',
+        'Design, develop, and deliver high-quality work within deadlines while maintaining a strong focus on client satisfaction.'
       ]
     }
   ];
 
   const education = [
     {
-      degree: 'Bachelor of Science in Computer Science',
-      school: 'University of Technology',
-      period: '2014 - 2018',
-      achievements: ['Graduated Summa Cum Laude', 'Dean\'s List for 6 semesters']
+      degree: 'Master\'s Degree in Computer Science',
+      school: 'University of Science and Technology',
+      period: '2020 - 2022',
+      description: 'Specialized in Software Engineering and System Architecture'
+    },
+    {
+      degree: 'Bachelor\'s Degree in Computer Science',
+      school: 'University of Science and Technology',
+      period: '2017 - 2020',
+      description: 'Foundation in Computer Science, Algorithms, and Programming'
     }
   ];
 
-  const certifications = [
-    'AWS Certified Solutions Architect',
-    'Docker Certified Associate',
-    'Kubernetes Administrator (CKA)',
-    'Google Cloud Professional DevOps Engineer'
+  const skills = [
+    'HTML/CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Vue.js',
+    'Node.js', 'PHP', 'Laravel', 'Python', 'Express.js',
+    'Docker', 'Kubernetes', 'AWS', 'CI/CD', 'Terraform', 'Jenkins',
+    'PostgreSQL', 'MongoDB', 'Redis', 'MySQL', 'Git', 'Linux'
   ];
 
   return (
-    <div className="pt-20 pb-12">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Curriculum Vitae</h1>
-          <p className="text-xl text-muted-foreground">
-            Web Developer & DevOps Engineer
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column */}
-          <div className="space-y-6">
-            {/* Skills */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Code2 className="h-5 w-5" />
-                  Technical Skills
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {Object.entries(skills).map(([category, skillList]) => (
-                  <div key={category}>
-                    <h4 className="font-semibold mb-2 text-primary">{category}</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {skillList.map((skill) => (
-                        <Badge key={skill} variant="secondary" className="text-xs">
-                          {skill}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-            {/* Certifications */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Award className="h-5 w-5" />
-                  Certifications
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  {certifications.map((cert, index) => (
-                    <li key={index} className="text-sm flex items-start gap-2">
-                      <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                      {cert}
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+    <div className="min-h-screen pt-32 pb-16">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col lg:flex-row gap-12">
+          {/* Left Sidebar */}
+          <div className="lg:w-64 flex-shrink-0">
+            <nav className="space-y-2 sticky top-32">
+              {sections.map((section) => (
+                <button
+                  key={section.id}
+                  onClick={() => setActiveSection(section.id)}
+                  className={`block w-full text-left px-4 py-2 rounded-md transition-colors ${
+                    activeSection === section.id
+                      ? 'bg-muted text-foreground font-medium'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  }`}
+                >
+                  {section.label}
+                </button>
+              ))}
+            </nav>
           </div>
 
-          {/* Right Column */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Experience */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Server className="h-5 w-5" />
-                  Professional Experience
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  {experience.map((exp, index) => (
-                    <div key={index} className="relative">
-                      {index !== experience.length - 1 && (
-                        <div className="absolute left-4 top-8 bottom-0 w-0.5 bg-border"></div>
-                      )}
-                      <div className="flex items-start gap-4">
-                        <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                          <div className="w-3 h-3 bg-primary rounded-full"></div>
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                            <h3 className="font-semibold text-lg">{exp.title}</h3>
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <Calendar className="h-4 w-4" />
-                              {exp.period}
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2 text-muted-foreground mb-3">
-                            <span className="font-medium">{exp.company}</span>
-                            <span>•</span>
-                            <div className="flex items-center gap-1">
-                              <MapPin className="h-3 w-3" />
-                              {exp.location}
-                            </div>
-                          </div>
-                          <ul className="space-y-1">
-                            {exp.description.map((item, i) => (
-                              <li key={i} className="text-sm flex items-start gap-2">
-                                <div className="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0"></div>
-                                {item}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+          {/* Main Content */}
+          <div className="flex-1">
+            {/* Profile Header */}
+            <div className="flex flex-col md:flex-row gap-8 mb-12">
+              <div className="flex-shrink-0">
+                <div className="w-48 h-48 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" 
+                    alt="Profile" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-              </CardContent>
-            </Card>
+                
+                <div className="mt-4 text-center">
+                  <div className="flex items-center justify-center space-x-1 text-muted-foreground mb-3">
+                    <MapPin className="w-4 h-4" />
+                    <span>Africa/Algiers</span>
+                  </div>
+                  
+                  <div className="flex justify-center space-x-2">
+                    <span className="px-3 py-1 bg-muted rounded-full text-sm">English</span>
+                    <span className="px-3 py-1 bg-muted rounded-full text-sm">French</span>
+                    <span className="px-3 py-1 bg-muted rounded-full text-sm">Arabic</span>
+                  </div>
+                </div>
+              </div>
 
-            {/* Education */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Database className="h-5 w-5" />
-                  Education
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {education.map((edu, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0">
-                      <div className="w-3 h-3 bg-accent rounded-full"></div>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                        <h3 className="font-semibold">{edu.degree}</h3>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Calendar className="h-4 w-4" />
-                          {edu.period}
+              <div className="flex-1">
+                <h1 className="text-5xl font-bold mb-2">Your Name</h1>
+                <p className="text-xl text-muted-foreground mb-6">Web Developer & DevOps Engineer</p>
+                
+                <div className="flex flex-wrap gap-4 mb-6">
+                  <Button variant="outline" size="sm" asChild>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                      <Github className="w-4 h-4 mr-2" />
+                      GitHub
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="sm" asChild>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                      <Linkedin className="w-4 h-4 mr-2" />
+                      LinkedIn
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="sm" asChild>
+                    <a href="mailto:your.email@example.com">
+                      <Mail className="w-4 h-4 mr-2" />
+                      Email
+                    </a>
+                  </Button>
+                </div>
+
+                <p className="text-muted-foreground leading-relaxed">
+                  I am an Algeria-based full-stack developer with a passion for transforming complex problems into efficient, scalable web solutions. 
+                  My work spans web development, interactive applications, and the seamless integration of design and technology.
+                </p>
+              </div>
+            </div>
+
+            {/* Dynamic Content Based on Active Section */}
+            {activeSection === 'introduction' && (
+              <div className="space-y-8">
+                <h2 className="text-3xl font-bold">Introduction</h2>
+                <div className="prose prose-lg max-w-none">
+                  <p className="text-muted-foreground leading-relaxed">
+                    Welcome to my professional portfolio. I am a passionate Web Developer and DevOps Engineer with extensive experience 
+                    in building modern, scalable web applications and implementing robust infrastructure solutions.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    My expertise spans across frontend and backend development, cloud technologies, and automation tools. 
+                    I enjoy solving complex problems and creating efficient, user-friendly solutions that make a real impact.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {activeSection === 'experience' && (
+              <div className="space-y-8">
+                <h2 className="text-3xl font-bold">Clients & Experiences</h2>
+                <div className="space-y-8">
+                  {experiences.map((exp, index) => (
+                    <div key={index} className="border-b border-border pb-8 last:border-b-0">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h3 className="text-xl font-semibold">{exp.company}</h3>
+                          <p className="text-accent">{exp.role}</p>
                         </div>
+                        <span className="text-muted-foreground">{exp.period}</span>
                       </div>
-                      <p className="text-muted-foreground mb-2">{edu.school}</p>
-                      <ul className="space-y-1">
-                        {edu.achievements.map((achievement, i) => (
-                          <li key={i} className="text-sm flex items-start gap-2">
-                            <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                            {achievement}
+                      <ul className="space-y-2">
+                        {exp.description.map((item, i) => (
+                          <li key={i} className="flex items-start">
+                            <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            <span className="text-muted-foreground">{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeSection === 'studies' && (
+              <div className="space-y-8">
+                <h2 className="text-3xl font-bold">Studies</h2>
+                <div className="space-y-6">
+                  {education.map((edu, index) => (
+                    <div key={index} className="border-b border-border pb-6 last:border-b-0">
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="text-xl font-semibold">{edu.degree}</h3>
+                        <span className="text-muted-foreground">{edu.period}</span>
+                      </div>
+                      <p className="text-accent mb-2">{edu.school}</p>
+                      <p className="text-muted-foreground">{edu.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {activeSection === 'skills' && (
+              <div className="space-y-8">
+                <h2 className="text-3xl font-bold">Technical Skills</h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {skills.map((skill, index) => (
+                    <div key={index} className="px-3 py-2 bg-muted rounded-md text-center text-sm">
+                      {skill}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
