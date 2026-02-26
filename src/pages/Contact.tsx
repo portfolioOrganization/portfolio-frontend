@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, Linkedin, MessageCircle, Send } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,7 +11,8 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
+    object: '',
+    service_type: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -20,19 +21,19 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Email',
-      value: 'contact@devopspro.com',
-      href: 'mailto:contact@devopspro.com'
+      value: 'djilali.dernane.contact@gmail.com',
+      href: 'mailto:djilali.dernane.contact@gmail.com'
     },
     {
       icon: Phone,
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567'
+      value: '+213698764880',
+      href: 'tel:+213698764880'
     },
     {
       icon: MapPin,
       title: 'Location',
-      value: 'Remote / San Francisco, CA',
+      value: 'Remote / Algeria',
       href: null
     }
   ];
@@ -41,24 +42,32 @@ const Contact = () => {
     {
       icon: Github,
       name: 'GitHub',
-      url: 'https://github.com',
-      handle: '@devopspro'
+      url: 'https://github.com/DJDERNANE',
+      handle: '@DJDERNANE'
     },
     {
       icon: Linkedin,
       name: 'LinkedIn',
-      url: 'https://linkedin.com',
-      handle: '/in/devopspro'
+      url: 'https://www.linkedin.com/in/djilali-dernane-8b1984218/',
+      handle: '/in/djilali-dernane-8b1984218'
     },
     {
-      icon: Twitter,
-      name: 'Twitter',
-      url: 'https://twitter.com',
-      handle: '@devopspro'
+      icon: MessageCircle,
+      name: 'WhatsApp',
+      url: 'https://wa.me/213698764880',
+      handle: '@213698764880'
     }
   ];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const serviceTypes = [
+    'Web Development',
+    'Mobile Development',
+    'DevOps',
+    'Consulting',
+    'Other'
+  ];
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -86,18 +95,35 @@ const Contact = () => {
     }
 
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      toast.success('Message sent successfully! I\'ll get back to you soon.');
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
+      const response = await fetch('http://localhost:8000/api/contacts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
       });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send message');
+      }
+
+      if (data.success) {
+        toast.success(data.message || 'Message sent successfully! I\'ll get back to you soon.');
+        setFormData({
+          name: '',
+          email: '',
+          object: '',
+          service_type: '',
+          message: ''
+        });
+      } else {
+        throw new Error(data.message || 'Failed to send message');
+      }
     } catch (error) {
-      toast.error('Failed to send message. Please try again.');
+      console.error('Error sending message:', error);
+      toast.error(error.message || 'Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -154,15 +180,34 @@ const Contact = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="subject">Subject</Label>
+                    <Label htmlFor="object">Subject *</Label>
                     <Input
-                      id="subject"
-                      name="subject"
+                      id="object"
+                      name="object"
                       type="text"
-                      value={formData.subject}
+                      value={formData.object}
                       onChange={handleInputChange}
                       placeholder="What's this about?"
+                      required
                     />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="service_type">Service Type</Label>
+                    <select
+                      id="service_type"
+                      name="service_type"
+                      value={formData.service_type}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background"
+                    >
+                      <option value="">Select a service type</option>
+                      {serviceTypes.map((service) => (
+                        <option key={service} value={service.toLowerCase().replace(' ', '_')}>
+                          {service}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   <div className="space-y-2">
@@ -226,6 +271,8 @@ const Contact = () => {
                         <a 
                           href={info.href}
                           className="block hover:bg-accent/50 p-2 -m-2 rounded-lg transition-colors"
+                          target={info.href.startsWith('http') ? '_blank' : undefined}
+                          rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                         >
                           {content}
                         </a>
@@ -282,7 +329,7 @@ const Contact = () => {
                   I'm currently accepting new projects and would love to hear about yours.
                 </p>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-accent rounded-full animate-pulse"></div>
+                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                   <span className="text-sm font-medium">Available for new projects</span>
                 </div>
               </CardContent>

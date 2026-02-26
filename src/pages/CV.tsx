@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, MapPin } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 
@@ -20,6 +20,15 @@ const CV = () => {
       description: [
         'Develop, and maintain web applications using various frameworks, ensuring optimal performance and scalability.',
         'Troubleshooting application issues, creating technical documentation and monitoring application performance.'
+      ]
+    },
+     {
+      company: 'LogiTrans',
+      period: '06/2025 ',
+      role: 'DevOps Trainer',
+      description: [
+        'Conduct comprehensive training sessions on DevOps practices, tools, and methodologies to enhance team capabilities.',
+        'Develop training materials, hands-on labs, and real-world scenarios to ensure practical understanding and application of DevOps concepts.'
       ]
     },
     {
@@ -44,23 +53,17 @@ const CV = () => {
 
   const education = [
     {
-      degree: 'Master\'s Degree in Computer Science',
-      school: 'University of Science and Technology',
-      period: '2020 - 2022',
-      description: 'Specialized in Software Engineering and System Architecture'
-    },
-    {
-      degree: 'Bachelor\'s Degree in Computer Science',
-      school: 'University of Science and Technology',
-      period: '2017 - 2020',
-      description: 'Foundation in Computer Science, Algorithms, and Programming'
+      degree: 'Engineer Degree in Network and Telecommunication Systems',
+      school: 'ENSTICP - Algiers, Algeria',
+      period: '2019 - 2024',
+      description: 'Specialized in networks, telecommunication,  cloud computing, telecommunications, and related technologies.'
     }
   ];
 
   const skills = [
-    'HTML/CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Vue.js',
+    'HTML/CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js', 
     'Node.js', 'PHP', 'Laravel', 'Python', 'Express.js',
-    'Docker', 'Kubernetes', 'AWS', 'CI/CD', 'Terraform', 'Jenkins',
+    'Docker', 'Kubernetes',  'CI/CD',  'Jenkins',
     'PostgreSQL', 'MongoDB', 'Redis', 'MySQL', 'Git', 'Linux'
   ];
 
@@ -94,7 +97,7 @@ const CV = () => {
               <div className="flex-shrink-0">
                 <div className="w-48 h-48 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 overflow-hidden">
                   <img 
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" 
+                    src="/avatar.jpeg" 
                     alt="Profile" 
                     className="w-full h-full object-cover"
                   />
@@ -115,28 +118,45 @@ const CV = () => {
               </div>
 
               <div className="flex-1">
-                <h1 className="text-5xl font-bold mb-2">Your Name</h1>
+                <h1 className="text-5xl font-bold mb-2">Dernane Djilali</h1>
                 <p className="text-xl text-muted-foreground mb-6">Web Developer & DevOps Engineer</p>
                 
                 <div className="flex flex-wrap gap-4 mb-6">
                   <Button variant="outline" size="sm" asChild>
-                    <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/DJDERNANE" target="_blank" rel="noopener noreferrer">
                       <Github className="w-4 h-4 mr-2" />
                       GitHub
                     </a>
                   </Button>
                   <Button variant="outline" size="sm" asChild>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.linkedin.com/in/djilali-dernane-8b1984218/" target="_blank" rel="noopener noreferrer">
                       <Linkedin className="w-4 h-4 mr-2" />
                       LinkedIn
                     </a>
                   </Button>
                   <Button variant="outline" size="sm" asChild>
-                    <a href="mailto:your.email@example.com">
+                    <a href="mailto:djilali.dernane.contact@gmail.com">
                       <Mail className="w-4 h-4 mr-2" />
                       Email
                     </a>
                   </Button>
+                  {/* WhatsApp Button */}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  asChild
+               
+                >
+                  <a
+                    href="https://wa.me/213698764880" // replace with your WhatsApp number (without + or 0)
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    Whatsapp
+                  </a>
+                </Button>
                 </div>
 
                 <p className="text-muted-foreground leading-relaxed">

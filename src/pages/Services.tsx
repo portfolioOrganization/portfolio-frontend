@@ -2,6 +2,7 @@ import { Code, Server, Cloud, Wrench, Shield, Zap } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import WorkProcess from '@/components/WorkProcess';
 
 const Services = () => {
   const services = [
@@ -16,7 +17,7 @@ const Services = () => {
         'Content Management Systems',
         'API development & integration'
       ],
-      pricing: 'Starting at $2,500'
+      // pricing: 'Starting at $2,500'
     },
     {
       icon: Cloud,
@@ -29,7 +30,7 @@ const Services = () => {
         'Performance optimization',
         'Monitoring & analytics setup'
       ],
-      pricing: 'Starting at $500'
+      // pricing: 'Starting at $500'
     },
     {
       icon: Server,
@@ -42,76 +43,12 @@ const Services = () => {
         'Automated testing',
         'Deployment automation'
       ],
-      pricing: 'Starting at $1,500'
+      // pricing: 'Starting at $1,500'
     },
-    {
-      icon: Shield,
-      title: 'Cloud Infrastructure',
-      description: 'Scalable and secure cloud infrastructure designed for your specific needs.',
-      features: [
-        'Architecture design & planning',
-        'Multi-cloud strategies',
-        'Load balancing & auto-scaling',
-        'Security implementation',
-        'Cost optimization'
-      ],
-      pricing: 'Starting at $2,000'
-    },
-    {
-      icon: Wrench,
-      title: 'Maintenance & Support',
-      description: 'Ongoing maintenance and support to keep your applications running smoothly.',
-      features: [
-        '24/7 monitoring',
-        'Regular updates & patches',
-        'Performance optimization',
-        'Backup & disaster recovery',
-        'Technical support'
-      ],
-      pricing: 'Starting at $200/month'
-    },
-    {
-      icon: Zap,
-      title: 'Performance Optimization',
-      description: 'Optimize your existing applications for better speed, SEO, and user experience.',
-      features: [
-        'Core Web Vitals optimization',
-        'Database query optimization',
-        'Caching strategies',
-        'Image & asset optimization',
-        'Mobile performance tuning'
-      ],
-      pricing: 'Starting at $800'
-    }
+
   ];
 
-  const processSteps = [
-    {
-      step: '01',
-      title: 'Discovery & Planning',
-      description: 'We start by understanding your requirements, goals, and technical needs through detailed consultation.',
-    },
-    {
-      step: '02',
-      title: 'Design & Architecture',
-      description: 'Create a comprehensive plan and architecture that aligns with your business objectives.',
-    },
-    {
-      step: '03',
-      title: 'Development & Implementation',
-      description: 'Build and implement the solution using best practices and modern technologies.',
-    },
-    {
-      step: '04',
-      title: 'Testing & Deployment',
-      description: 'Thorough testing followed by seamless deployment to production environment.',
-    },
-    {
-      step: '05',
-      title: 'Maintenance & Support',
-      description: 'Ongoing support and maintenance to ensure optimal performance and security.',
-    },
-  ];
+
 
   return (
     <div className="pt-20 pb-12">
@@ -169,22 +106,9 @@ const Services = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-            {processSteps.map((process, index) => (
-              <div key={index} className="text-center">
-                <div className="relative mb-6">
-                  <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center border-2 border-primary/20">
-                    <span className="text-lg font-bold text-primary">{process.step}</span>
-                  </div>
-                  {index < processSteps.length - 1 && (
-                    <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-border -translate-x-8"></div>
-                  )}
-                </div>
-                <h3 className="font-semibold text-lg mb-2">{process.title}</h3>
-                <p className="text-sm text-muted-foreground">{process.description}</p>
-              </div>
-            ))}
-          </div>
+
+          <WorkProcess />
+
         </section>
 
         {/* CTA Section */}
