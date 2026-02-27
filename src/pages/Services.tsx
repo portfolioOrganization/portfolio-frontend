@@ -24,11 +24,11 @@ const Services = () => {
       title: 'Website Deployment',
       description: 'Professional deployment services ensuring your applications are live, secure, and performant.',
       features: [
-        'Cloud hosting setup (AWS, GCP, Azure)',
+        'Cloud hosting setup',
         'Domain & SSL configuration',
         'CDN implementation',
         'Performance optimization',
-        'Monitoring & analytics setup'
+        
       ],
       // pricing: 'Starting at $500'
     },
@@ -39,11 +39,23 @@ const Services = () => {
       features: [
         'CI/CD pipeline setup',
         'Docker containerization',
-        'Infrastructure as Code',
-        'Automated testing',
-        'Deployment automation'
+        'Deployment automation',
+        'Monitoring & analytics setup'
       ],
       // pricing: 'Starting at $1,500'
+    },
+    {
+      icon: Wrench,
+      title: 'Maintenance & Support',
+      description: 'Ongoing maintenance and support services to keep your applications running smoothly.',
+      features: [
+        'Bug fixes & patches',
+        'Performance optimization',
+        'Security updates',
+        'Technical support 24/7',
+        'Feature updates & enhancements'
+      ],
+      // pricing: 'Starting at $800/month'
     },
 
   ];
@@ -63,11 +75,11 @@ const Services = () => {
 
         {/* Services Grid */}
         <section className="mb-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col">
                   <CardHeader>
                     <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                       <Icon className="h-6 w-6 text-primary" />
@@ -75,8 +87,8 @@ const Services = () => {
                     <CardTitle className="text-xl mb-2">{service.title}</CardTitle>
                     <p className="text-muted-foreground">{service.description}</p>
                   </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2 mb-6">
+                  <CardContent className="flex flex-col flex-1">
+                    <ul className="space-y-2 mb-6 flex-1">
                       {service.features.map((feature, i) => (
                         <li key={i} className="text-sm flex items-start gap-2">
                           <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>

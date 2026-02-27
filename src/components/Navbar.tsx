@@ -24,11 +24,11 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 w-full z-50">
-      <div className="max-w-4xl mx-auto px-6 py-8">
+      <div className="max-w-4xl mx-auto px-6 py-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <Link to="/" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              Africa/Algiers
+              <img src="/pr-logo.png" alt="Logo" className="h-25 w-40 mr-2" />
             </Link>
           </div>
 

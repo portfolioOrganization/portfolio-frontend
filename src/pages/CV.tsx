@@ -1,9 +1,17 @@
-import { Github, Linkedin, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, MessageCircle, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useState } from 'react';
 
 const CV = () => {
   const [activeSection, setActiveSection] = useState('introduction');
+  const [showCVDownloadModal, setShowCVDownloadModal] = useState(false);
 
   const sections = [
     { id: 'introduction', label: 'Introduction' },
@@ -122,6 +130,13 @@ const CV = () => {
                 <p className="text-xl text-muted-foreground mb-6">Web Developer & DevOps Engineer</p>
                 
                 <div className="flex flex-wrap gap-4 mb-6">
+                  <Button 
+                    size="sm" 
+                    onClick={() => setShowCVDownloadModal(true)}
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Download CV
+                  </Button>
                   <Button variant="outline" size="sm" asChild>
                     <a href="https://github.com/DJDERNANE" target="_blank" rel="noopener noreferrer">
                       <Github className="w-4 h-4 mr-2" />
@@ -242,6 +257,36 @@ const CV = () => {
             )}
           </div>
         </div>
+
+        {/* CV Download Modal */}
+        <Dialog open={showCVDownloadModal} onOpenChange={setShowCVDownloadModal}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Select CV Version</DialogTitle>
+              <DialogDescription>Choose which language version you'd like to download</DialogDescription>
+            </DialogHeader>
+            <div className="space-y-3">
+              <Button 
+                className="w-full justify-center" 
+                asChild
+              >
+                <a href="/cv-en.pdf" download="Dernane_Djilali_CV_English.pdf">
+                  <Download className="w-4 h-4 mr-2" />
+                  English Version
+                </a>
+              </Button>
+              <Button 
+                className="w-full justify-center" 
+                asChild
+              >
+                <a href="/cv-fr.pdf" download="Dernane_Djilali_CV_Francais.pdf">
+                  <Download className="w-4 h-4 mr-2" />
+                  Version Française
+                </a>
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
