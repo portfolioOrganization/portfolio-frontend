@@ -49,7 +49,7 @@ const FeaturedProjects = () => {
           title: project.title,
           category: 'Web Development',
           description: project.description,
-          image: `${import.meta.env.NEXT_PUBLIC_STORAGE_URL}${project.featured_image}`,
+          image: `${import.meta.env.VITE_STORAGE_URL}${project.featured_image}`,
           tags: project.technologies.split(',').map(tag => tag.trim()),
           link: project.project_url || '#',
           github: project.github_url || null,
