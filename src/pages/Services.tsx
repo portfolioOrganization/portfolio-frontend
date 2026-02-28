@@ -97,7 +97,6 @@ const Services = () => {
                       ))}
                     </ul>
                     <div className="border-t pt-4">
-                      <p className="text-lg font-semibold text-primary mb-3">{service.pricing}</p>
                       <Button asChild className="w-full">
                         <Link to="/contact">Get Quote</Link>
                       </Button>

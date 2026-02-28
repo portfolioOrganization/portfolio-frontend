@@ -41,7 +41,7 @@ const FeaturedProjects = () => {
   useEffect(() => {
     const fetchFeaturedProjects = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/projects/featured');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/projects/featured`);
         const data: Project[] = await response.json();
         
         const formattedProjects: FormattedProject[] = data.map((project, index) => ({
@@ -49,7 +49,7 @@ const FeaturedProjects = () => {
           title: project.title,
           category: 'Web Development',
           description: project.description,
-          image: project.featured_image ? `${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/storage/${project.featured_image}` : 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=450&fit=crop',
+          image: `${import.meta.env.NEXT_PUBLIC_STORAGE_URL}${project.featured_image}`,
           tags: project.technologies.split(',').map(tag => tag.trim()),
           link: project.project_url || '#',
           github: project.github_url || null,

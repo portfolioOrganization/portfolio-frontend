@@ -3,7 +3,7 @@ import { ExternalLink, Github, Filter, Star, Calendar, Code, Zap, Users, ArrowUp
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import GalleryModal from '@/components/galleryModal';
+import GalleryModal from '@/components/GalleryModal';
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -18,7 +18,7 @@ const Portfolio = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/projects');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/projects`);
         if (!response.ok) {
           throw new Error('Failed to fetch projects');
         }
@@ -40,9 +40,7 @@ const Portfolio = () => {
     title: project.title,
     category: 'Web Development', // You might want to add this field to your API
     description: project.description,
-    image: project.featured_image
-      ? `http://localhost:8000/storage/${project.featured_image}`
-      : 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop',
+    image: `${import.meta.env.VITE_STORAGE_URL}${project.featured_image}`,
     technologies: project.technologies
       ? typeof project.technologies === 'string'
         ? project.technologies.split(',').map(tech => tech.trim())
@@ -250,7 +248,7 @@ const Portfolio = () => {
                               onClick={() => openGallery(project, itemIndex)}
                             >
                               <img
-                                src={`http://localhost:8000/storage/${item.image_path}`}
+                                src={`${import.meta.env.VITE_STORAGE_URL}${item.image_path}`}
                                 alt={item.caption || 'Gallery item'}
                                 className="w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-300"
                               />

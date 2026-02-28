@@ -55,7 +55,7 @@ const GalleryModal = ({ images, isOpen, onClose, initialIndex = 0 }) => {
           {/* Image display */}
           <div className="relative w-full h-full flex items-center justify-center">
             <img
-              src={`http://localhost:8000/storage/${images[currentIndex].image_path}`}
+              src={`${import.meta.env.NEXT_PUBLIC_STORAGE_URL}${images[currentIndex].image_path}`}
               alt={images[currentIndex].caption || `Gallery image ${currentIndex + 1}`}
               className="max-w-full max-h-full object-contain"
             />
