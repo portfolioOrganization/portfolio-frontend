@@ -1,14 +1,14 @@
 # Stage 1: Dependencies
-FROM node:18-alpine AS dependencies
+FROM oven/bun:latest AS dependencies
 
 WORKDIR /app
 
 COPY package.json bun.lockb* ./
 
-RUN npm install --frozen-lockfile
+RUN bun install --frozen-lockfile
 
 # Stage 2: Builder
-FROM node:18-alpine AS builder
+FROM oven/bun:latest AS builder
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
 
 # Build the application
-RUN npm run build
+RUN bun run build
 
 # Stage 3: Production - Using Node with serve
 FROM node:18-alpine AS production
