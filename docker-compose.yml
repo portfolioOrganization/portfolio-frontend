@@ -5,10 +5,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://admin.dr-dev.tech/api
+        - VITE_STORAGE_URL=http://admin.dr-dev.tech/storage/
     ports:
       - "3000:80"
-    env_file:
-      - .env
     # depends_on:
     #   - backend
     networks:
