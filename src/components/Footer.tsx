@@ -6,10 +6,10 @@ const Footer = () => {
 
   const quickLinks = [
     { name: 'Home', path: '/' },
-    { name: 'CV', path: '/cv' },
+    // { name: 'CV', path: '/cv' },
     { name: 'Portfolio', path: '/portfolio' },
     { name: 'Services', path: '/services' },
-    { name: 'Blog', path: '/blog' },
+    // { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -26,7 +26,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-primary">DevOps Pro</h3>
+            <h3 className="text-lg font-bold text-primary">Dr-Dev</h3>
             <p className="text-muted-foreground">
               Web Developer & DevOps Engineer passionate about creating scalable solutions and automating workflows.
             </p>
@@ -35,7 +35,7 @@ const Footer = () => {
           {/* Quick Links */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Quick Links</h3>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 gap-2">
               {quickLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -70,11 +70,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-border text-center">
-          <p className="text-muted-foreground">
-            © {currentYear} DevOps Pro. All rights reserved.
-          </p>
-        </div>
+       
       </div>
     </footer>
   );

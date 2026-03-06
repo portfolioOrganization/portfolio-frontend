@@ -37,7 +37,7 @@ const HeroSection = () => {
                 I build{' '}
                 <span className="text-primary font-semibold">scalable web applications</span> and{' '}
                 <span className="text-accent font-semibold">robust DevOps solutions</span> that drive
-                business growth. Specialized in React, Next.js, TypeScript, and cloud infrastructure.
+                business growth. 
               </p>
             </div>
           </div>
@@ -45,7 +45,7 @@ const HeroSection = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
             <Button asChild size="lg" className="group px-8">
-              <a href="#projects" className="flex items-center gap-2">
+              <a href="/portfolio" className="flex items-center gap-2">
                 View My Work
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>

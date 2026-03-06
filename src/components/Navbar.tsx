@@ -23,12 +23,12 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50">
-      <div className="max-w-4xl mx-auto px-6 py-6">
-        <div className="flex items-center justify-between">
+    <nav className="fixed top-0 w-full z-50 ">
+      <div className="max-w-4xl mx-auto px-2 py-4">
+        <div className="flex items-center justify-between bg-muted/50 backdrop-blur-md rounded-full">
           <div className="flex items-center">
             <Link to="/" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              <img src="/pr-logo.png" alt="Logo" className="h-25 w-40 mr-2" />
+              <img src="/pr-logo.png" alt="Logo" className="h-16 w-40 mr-2" />
             </Link>
           </div>
 
@@ -51,7 +51,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 ">
             <div className="text-sm text-muted-foreground">
               {new Date().toLocaleTimeString('en-US', { 
                 timeZone: 'Africa/Algiers',
@@ -79,7 +79,7 @@ const Navbar = () => {
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-8 h-8"
+                className="w-12 h-12"
               >
                 {isOpen ? (
                   <X className="h-4 w-4" />
@@ -95,7 +95,7 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       {isOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-b border-border">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-b border-border ">
             {navItems.map((item) => (
               <Link
                 key={item.name}

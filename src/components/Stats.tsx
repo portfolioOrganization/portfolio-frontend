@@ -4,34 +4,28 @@ const Stats = () => {
   const stats = [
     {
       icon: Code,
-      value: '50+',
+      value: '20+',
       label: 'Projects Completed',
       color: 'text-primary'
     },
     {
       icon: Users,
-      value: '30+',
+      value: '10+',
       label: 'Happy Clients',
       color: 'text-accent'
     },
     {
       icon: Award,
-      value: '5+',
+      value: '3+',
       label: 'Years Experience',
       color: 'text-primary'
-    },
-    {
-      icon: TrendingUp,
-      value: '100%',
-      label: 'Project Success Rate',
-      color: 'text-accent'
     }
   ];
 
   return (
     <div className="py-16 bg-foreground/[0.02] border-b border-border/50">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-4">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (

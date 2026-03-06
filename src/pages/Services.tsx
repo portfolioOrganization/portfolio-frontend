@@ -12,7 +12,6 @@ const Services = () => {
       description: 'Custom web applications built with modern technologies like React, Next.js, and TypeScript.',
       features: [
         'Responsive web design',
-        'Progressive Web Apps (PWA)',
         'E-commerce solutions',
         'Content Management Systems',
         'API development & integration'
@@ -28,7 +27,6 @@ const Services = () => {
         'Domain & SSL configuration',
         'CDN implementation',
         'Performance optimization',
-        
       ],
       // pricing: 'Starting at $500'
     },
@@ -52,7 +50,6 @@ const Services = () => {
         'Bug fixes & patches',
         'Performance optimization',
         'Security updates',
-        'Technical support 24/7',
         'Feature updates & enhancements'
       ],
       // pricing: 'Starting at $800/month'
@@ -110,16 +107,7 @@ const Services = () => {
 
         {/* Process Section */}
         <section className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">My Process</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              A structured approach to deliver exceptional results on every project.
-            </p>
-          </div>
-
-
           <WorkProcess />
-
         </section>
 
         {/* CTA Section */}

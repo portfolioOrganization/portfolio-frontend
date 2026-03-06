@@ -72,7 +72,7 @@ const CTA = () => {
         {/* Secondary CTA */}
         <div className="mt-12 text-center">
           <p className="text-muted-foreground mb-4">
-            Available for freelance projects and full-time opportunities
+            Available for freelance projects. Let's build something amazing together!
           </p>
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-foreground/5 rounded-full text-sm font-medium text-foreground border border-foreground/10">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>

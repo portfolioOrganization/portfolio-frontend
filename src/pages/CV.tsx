@@ -30,7 +30,7 @@ const CV = () => {
         'Troubleshooting application issues, creating technical documentation and monitoring application performance.'
       ]
     },
-     {
+    {
       company: 'LogiTrans',
       period: '06/2025 ',
       role: 'DevOps Trainer',
@@ -41,7 +41,7 @@ const CV = () => {
     },
     {
       company: 'Apollo Digital Solutions',
-      period: '06/2024 - 07/2024', 
+      period: '06/2024 - 07/2024',
       role: 'Fullstack developer',
       description: [
         'Design and implement web applications by building server-side logic and APIs while creating responsive front-end interfaces.',
@@ -69,9 +69,9 @@ const CV = () => {
   ];
 
   const skills = [
-    'HTML/CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js', 
+    'HTML/CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js',
     'Node.js', 'PHP', 'Laravel', 'Python', 'Express.js',
-    'Docker', 'Kubernetes',  'CI/CD',  'Jenkins',
+    'Docker', 'Kubernetes', 'CI/CD', 'Jenkins',
     'PostgreSQL', 'MongoDB', 'Redis', 'MySQL', 'Git', 'Linux'
   ];
 
@@ -86,11 +86,10 @@ const CV = () => {
                 <button
                   key={section.id}
                   onClick={() => setActiveSection(section.id)}
-                  className={`block w-full text-left px-4 py-2 rounded-md transition-colors ${
-                    activeSection === section.id
-                      ? 'bg-muted text-foreground font-medium'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                  }`}
+                  className={`block w-full text-left px-4 py-2 rounded-md transition-colors ${activeSection === section.id
+                    ? 'bg-muted text-foreground font-medium'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                    }`}
                 >
                   {section.label}
                 </button>
@@ -104,19 +103,19 @@ const CV = () => {
             <div className="flex flex-col md:flex-row gap-8 mb-12">
               <div className="flex-shrink-0">
                 <div className="w-48 h-48 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 overflow-hidden">
-                  <img 
-                    src="/avatar.jpeg" 
-                    alt="Profile" 
+                  <img
+                    src="/avatar.jpeg"
+                    alt="Profile"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                
+
                 <div className="mt-4 text-center">
                   <div className="flex items-center justify-center space-x-1 text-muted-foreground mb-3">
                     <MapPin className="w-4 h-4" />
                     <span>Africa/Algiers</span>
                   </div>
-                  
+
                   <div className="flex justify-center space-x-2">
                     <span className="px-3 py-1 bg-muted rounded-full text-sm">English</span>
                     <span className="px-3 py-1 bg-muted rounded-full text-sm">French</span>
@@ -128,10 +127,10 @@ const CV = () => {
               <div className="flex-1">
                 <h1 className="text-5xl font-bold mb-2">Dernane Djilali</h1>
                 <p className="text-xl text-muted-foreground mb-6">Web Developer & DevOps Engineer</p>
-                
+
                 <div className="flex flex-wrap gap-4 mb-6">
-                  <Button 
-                    size="sm" 
+                  <Button
+                    size="sm"
                     onClick={() => setShowCVDownloadModal(true)}
                   >
                     <Download className="w-4 h-4 mr-2" />
@@ -156,27 +155,28 @@ const CV = () => {
                     </a>
                   </Button>
                   {/* WhatsApp Button */}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  asChild
-               
-                >
-                  <a
-                    href="https://wa.me/213698764880" // replace with your WhatsApp number (without + or 0)
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="WhatsApp"
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    asChild
+
                   >
-                    <MessageCircle className="w-5 h-5" />
-                    Whatsapp
-                  </a>
-                </Button>
+                    <a
+                      href="https://wa.me/213698764880" // replace with your WhatsApp number (without + or 0)
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="WhatsApp"
+                    >
+                      <MessageCircle className="w-5 h-5" />
+                      Whatsapp
+                    </a>
+                  </Button>
                 </div>
 
                 <p className="text-muted-foreground leading-relaxed">
-                  I am an Algeria-based full-stack developer with a passion for transforming complex problems into efficient, scalable web solutions. 
-                  My work spans web development, interactive applications, and the seamless integration of design and technology.
+                  I am a Full-Stack Developer and DevOps Engineer with a passion for transforming complex problems into efficient, scalable web solutions. My work spans web development and interactive applications, ensuring seamless integration between design, development, and deployment.
+
+                  I specialize in building robust applications across the entire stack while also designing and managing the CI/CD pipelines, automation, and infrastructure that power reliable and scalable systems.
                 </p>
               </div>
             </div>
@@ -187,12 +187,21 @@ const CV = () => {
                 <h2 className="text-3xl font-bold">Introduction</h2>
                 <div className="prose prose-lg max-w-none">
                   <p className="text-muted-foreground leading-relaxed">
-                    Welcome to my professional portfolio. I am a passionate Web Developer and DevOps Engineer with extensive experience 
-                    in building modern, scalable web applications and implementing robust infrastructure solutions.
+                    Welcome to my professional portfolio. I am a passionate Full-Stack Developer and DevOps Engineer
+                    specialized in building modern, scalable, and high-performance web applications. I focus on
+                    transforming complex ideas into reliable digital solutions that deliver real value.
                   </p>
+
                   <p className="text-muted-foreground leading-relaxed">
-                    My expertise spans across frontend and backend development, cloud technologies, and automation tools. 
-                    I enjoy solving complex problems and creating efficient, user-friendly solutions that make a real impact.
+                    My expertise covers the full development lifecycle — from designing intuitive user interfaces
+                    and developing robust backend systems to implementing cloud infrastructure, CI/CD pipelines,
+                    and automation workflows. I enjoy solving challenging problems and building efficient systems
+                    that are secure, maintainable, and scalable.
+                  </p>
+
+                  <p className="text-muted-foreground leading-relaxed">
+                    I am always exploring new technologies and best practices to improve performance, streamline
+                    development processes, and create impactful products that combine innovation with reliability.
                   </p>
                 </div>
               </div>
@@ -266,8 +275,8 @@ const CV = () => {
               <DialogDescription>Choose which language version you'd like to download</DialogDescription>
             </DialogHeader>
             <div className="space-y-3">
-              <Button 
-                className="w-full justify-center" 
+              <Button
+                className="w-full justify-center"
                 asChild
               >
                 <a href="/cv-en.pdf" download="Dernane_Djilali_CV_English.pdf">
@@ -275,8 +284,8 @@ const CV = () => {
                   English Version
                 </a>
               </Button>
-              <Button 
-                className="w-full justify-center" 
+              <Button
+                className="w-full justify-center"
                 asChild
               >
                 <a href="/cv-fr.pdf" download="Dernane_Djilali_CV_Francais.pdf">

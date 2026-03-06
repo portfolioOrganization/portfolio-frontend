@@ -9,7 +9,6 @@ const WhatIDo = () => {
       description: 'Custom web applications built with modern technologies like React, Next.js, and TypeScript.',
       features: [
         'Responsive web design',
-        'Progressive Web Apps (PWA)',
         'E-commerce solutions',
         'API development & integration'
       ],
@@ -24,7 +23,6 @@ const WhatIDo = () => {
       features: [
         'Cloud hosting setup',
         'Domain & SSL configuration',
-        'CDN implementation',
         'Performance optimization'
       ],
       color: 'from-accent/20 to-accent/5',
@@ -38,8 +36,7 @@ const WhatIDo = () => {
       features: [
         'CI/CD pipeline setup',
         'Docker containerization',
-        'Deployment automation',
-        'Monitoring & analytics setup'
+        'Monitoring & logging solutions'
       ],
       color: 'from-primary/20 to-primary/5',
       borderColor: 'border-primary/20 hover:border-primary/40'
@@ -52,7 +49,6 @@ const WhatIDo = () => {
       features: [
         'Bug fixes & patches',
         'Performance optimization',
-        'Security updates',
         'Feature updates & enhancements'
       ],
       color: 'from-accent/20 to-accent/5',

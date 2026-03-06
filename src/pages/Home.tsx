@@ -22,7 +22,7 @@ const Home = () => {
       
       <WorkProcess />
 
-      <Testimonials />
+      {/* <Testimonials /> */}
 
       <CTA />
       

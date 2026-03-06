@@ -137,7 +137,7 @@ const Portfolio = () => {
             {/* Quick Stats */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto mt-12">
               <div className="text-center group">
-                <div className="text-3xl font-bold text-primary mb-1 group-hover:scale-110 transition-transform">{mappedProjects.length}+</div>
+                <div className="text-3xl font-bold text-primary mb-1 group-hover:scale-110 transition-transform">20+</div>
                 <div className="text-sm text-muted-foreground">Projects</div>
               </div>
               <div className="text-center group">
@@ -145,7 +145,7 @@ const Portfolio = () => {
                 <div className="text-sm text-muted-foreground">Years Exp</div>
               </div>
               <div className="text-center group">
-                <div className="text-3xl font-bold text-primary mb-1 group-hover:scale-110 transition-transform">25+</div>
+                <div className="text-3xl font-bold text-primary mb-1 group-hover:scale-110 transition-transform">10+</div>
                 <div className="text-sm text-muted-foreground">Clients</div>
               </div>
               <div className="text-center group">
