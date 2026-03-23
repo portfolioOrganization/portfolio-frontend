@@ -1,5 +1,4 @@
 import { ExternalLink, Github, ArrowUpRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 
 interface Project {
@@ -12,26 +11,16 @@ interface Project {
   featured_image: string;
   is_published: boolean;
   is_featured: boolean;
-  sort_order: number;
-  gallery_items: Array<{
-    id: number;
-    project_id: number;
-    image_path: string;
-    caption: string;
-    display_order: number;
-  }>;
 }
 
 interface FormattedProject {
   id: number;
   title: string;
-  category: string;
   description: string;
   image: string;
   tags: string[];
   link: string;
   github: string | null;
-  color: string;
 }
 
 const FeaturedProjects = () => {
@@ -43,139 +32,137 @@ const FeaturedProjects = () => {
       try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/projects/featured`);
         const data: Project[] = await response.json();
-        
-        const formattedProjects: FormattedProject[] = data.map((project, index) => ({
-          id: project.id,
-          title: project.title,
-          category: 'Web Development',
-          description: project.description,
-          image: `${import.meta.env.VITE_STORAGE_URL}${project.featured_image}`,
-          tags: project.technologies.split(',').map(tag => tag.trim()),
-          link: project.project_url || '#',
-          github: project.github_url || null,
-          color: index % 2 === 0 ? 'from-primary' : 'from-accent',
-        }));
-        
-        setProjects(formattedProjects);
-      } catch (error) {
-        console.error('Error fetching featured projects:', error);
+        setProjects(data.map(p => ({
+          id: p.id,
+          title: p.title,
+          description: p.description,
+          image: `${import.meta.env.VITE_STORAGE_URL}${p.featured_image}`,
+          tags: p.technologies.split(',').map(t => t.trim()),
+          link: p.project_url || '#',
+          github: p.github_url || null,
+        })));
+      } catch (e) {
+        console.error(e);
       } finally {
         setLoading(false);
       }
     };
-
     fetchFeaturedProjects();
   }, []);
 
   return (
-    <div id="projects" className="py-24 bg-background relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl opacity-50"></div>
+    <section className="py-24 sm:py-32 px-5 sm:px-8 lg:px-16">
+      <div className="max-w-5xl mx-auto">
 
-      <div className="max-w-7xl mx-auto px-6 relative">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Featured Projects
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Showcase of my recent work combining innovation, technical excellence, and creative problem-solving
-          </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent rounded-full mx-auto mt-6"></div>
+        {/* Section label */}
+        <div className="flex items-center gap-4 mb-16">
+          <span className="text-xs uppercase tracking-widest text-muted-foreground/60 font-medium">Selected Work</span>
+          <div className="h-px flex-1 bg-border/60 max-w-[60px]" />
         </div>
 
         {loading ? (
-          <div className="text-center py-20">
-            <p className="text-muted-foreground">Loading projects...</p>
+          <div className="space-y-8">
+            {[1, 2].map(i => <div key={i} className="h-64 rounded-2xl bg-muted animate-pulse" />)}
           </div>
         ) : projects.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-muted-foreground">No featured projects available.</p>
-          </div>
+          <p className="text-muted-foreground text-sm">No featured projects yet.</p>
         ) : (
-          <div className="space-y-20">
+          <div className="space-y-24">
             {projects.map((project, index) => (
-            <div key={project.id} className="group">
-              <div className="grid lg:grid-cols-2 gap-12 items-center">
-                {/* Content */}
-                <div className={`space-y-6 ${index === 1 ? 'lg:order-2' : ''}`}>
-                  <div className="inline-flex items-center px-3 py-1 bg-foreground/5 rounded-full text-sm font-medium text-foreground/75 border border-foreground/10">
-                    {project.category}
+              <div
+                key={project.id}
+                className={`flex flex-col gap-8 lg:gap-16 lg:items-center ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
+              >
+                {/* Image */}
+                <div className="w-full lg:w-[55%] group/img flex-shrink-0">
+                  <div className="relative aspect-[4/3] sm:aspect-video rounded-2xl overflow-hidden bg-muted">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                    {project.link && project.link !== '#' && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm flex items-center justify-center text-white opacity-0 group-hover/img:opacity-100 transition-opacity"
+                      >
+                        <ArrowUpRight className="w-4 h-4" />
+                      </a>
+                    )}
                   </div>
+                </div>
 
-                  <h3 className="text-4xl md:text-5xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                {/* Content */}
+                <div className="flex-1 space-y-5">
+                  {/* Index number */}
+                  <span className="text-[10px] font-mono text-muted-foreground/40 uppercase tracking-widest">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+
+                  <h3 className="text-2xl sm:text-3xl font-bold leading-tight text-foreground">
                     {project.title}
                   </h3>
 
-                  <p className="text-lg text-muted-foreground leading-relaxed">
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                     {project.description}
                   </p>
 
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2 pt-4">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 bg-foreground/5 text-foreground/70 text-sm rounded-full border border-foreground/10 group-hover:border-primary/30 group-hover:text-primary transition-all"
-                      >
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {project.tags.map(tag => (
+                      <span key={tag} className="px-2.5 py-1 text-[11px] font-medium bg-muted rounded-md text-muted-foreground">
                         {tag}
                       </span>
                     ))}
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="flex flex-wrap gap-4 pt-8">
-                    <Button asChild className="group/btn">
-                      <a href={project.link} className="flex items-center gap-2">
-                        View Project
-                        <ExternalLink className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                  {/* Links */}
+                  <div className="flex items-center gap-3 pt-2">
+                    {project.link && project.link !== '#' && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors group/link"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        Live Demo
+                        <ArrowUpRight className="w-3 h-3 opacity-0 group-hover/link:opacity-100 transition-opacity" />
                       </a>
-                    </Button>
+                    )}
                     {project.github && (
-                      <Button variant="outline" asChild>
-                        <a href={project.github} className="flex items-center gap-2">
-                          <Github className="w-4 h-4" />
-                          Source Code
-                        </a>
-                      </Button>
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        <Github className="w-3.5 h-3.5" />
+                        Source
+                      </a>
                     )}
                   </div>
                 </div>
-
-                {/* Image */}
-                <div className={`${index === 1 ? 'lg:order-1' : ''}`}>
-                  <div className="relative aspect-video rounded-3xl overflow-hidden bg-gradient-to-br from-foreground/5 to-foreground/10 group-hover:shadow-2xl group-hover:shadow-foreground/10 transition-all duration-500">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                    
-                    {/* Floating Badge */}
-                    <div className="absolute top-6 right-6 flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-white text-sm font-medium border border-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-y-2 group-hover:translate-y-0">
-                      <ArrowUpRight className="w-4 h-4" />
-                      Visit
-                    </div>
-                  </div>
-                </div>
               </div>
-            </div>
             ))}
           </div>
         )}
 
-        {/* View All Projects CTA */}
-        <div className="text-center mt-20">
-          <Button asChild size="lg" variant="outline" className="group">
-            <a href="/portfolio" className="flex items-center gap-2">
-              View All Projects
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </a>
-          </Button>
+        {/* View all */}
+        <div className="mt-20 pt-10 border-t border-border/60">
+          <a
+            href="/portfolio"
+            className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group"
+          >
+            View all projects
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

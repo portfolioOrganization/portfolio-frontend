@@ -14,6 +14,7 @@ import Blog from '@/pages/Blog';
 import Contact from '@/pages/Contact';
 import NotFound from "./pages/NotFound";
 import BlogDetail from "./pages/BlogDetails";
+import ScrollToTop from '@/components/ScrollToTop';
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <div className="min-h-screen bg-background text-foreground">
             <Navbar />
             <main>
