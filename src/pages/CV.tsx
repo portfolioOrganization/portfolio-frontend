@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, MapPin, MessageCircle, Download } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, MessageCircle, Download, Briefcase, GraduationCap, Code2, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -8,295 +8,299 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useState } from 'react';
+import { cn } from '@/lib/utils';
+
+const experiences = [
+  {
+    company: 'ICOSNET',
+    period: '07/2024 – Present',
+    role: 'Development and Application Engineer',
+    description: [
+      'Develop and maintain web applications using various frameworks, ensuring optimal performance and scalability.',
+      'Troubleshoot application issues, create technical documentation and monitor application performance.',
+    ],
+  },
+  {
+    company: 'LogiTrans',
+    period: '06/2025',
+    role: 'DevOps Trainer',
+    description: [
+      'Conduct comprehensive training sessions on DevOps practices, tools, and methodologies.',
+      'Develop training materials, hands-on labs, and real-world scenarios for practical understanding.',
+    ],
+  },
+  {
+    company: 'Apollo Digital Solutions',
+    period: '06/2024 – 07/2024',
+    role: 'Fullstack Developer',
+    description: [
+      'Design and implement web applications with server-side logic, APIs, and responsive front-end interfaces.',
+      'Manage databases, optimise performance and oversee deployment.',
+    ],
+  },
+  {
+    company: 'Remotely',
+    period: '2023 – Present',
+    role: 'Full-Stack Freelancer',
+    description: [
+      'Manage client communication, requirement gathering, and project scoping end-to-end.',
+      'Design, develop and deliver high-quality work within deadlines with a focus on client satisfaction.',
+    ],
+  },
+];
+
+const education = [
+  {
+    degree: 'Engineer Degree in Network and Telecommunication Systems',
+    school: 'ENSTICP – Algiers, Algeria',
+    period: '2019 – 2024',
+    description: 'Specialised in networks, cloud computing, telecommunications, and related technologies.',
+  },
+];
+
+const skillGroups = [
+  { label: 'Frontend',      skills: ['HTML/CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js'] },
+  { label: 'Backend',       skills: ['Node.js', 'PHP', 'Laravel', 'Python', 'Express.js'] },
+  { label: 'DevOps',        skills: ['Docker', 'Kubernetes', 'CI/CD', 'Jenkins', 'Linux'] },
+  { label: 'Data & Tools',  skills: ['PostgreSQL', 'MongoDB', 'Redis', 'MySQL', 'Git'] },
+];
+
+const sections = [
+  { id: 'introduction', label: 'Introduction', icon: User },
+  { id: 'experience',   label: 'Experience',   icon: Briefcase },
+  { id: 'studies',      label: 'Studies',      icon: GraduationCap },
+  { id: 'skills',       label: 'Skills',       icon: Code2 },
+];
 
 const CV = () => {
   const [activeSection, setActiveSection] = useState('introduction');
-  const [showCVDownloadModal, setShowCVDownloadModal] = useState(false);
-
-  const sections = [
-    { id: 'introduction', label: 'Introduction' },
-    { id: 'experience', label: 'Clients & Experiences' },
-    { id: 'studies', label: 'Studies' },
-    { id: 'skills', label: 'Technical skills' }
-  ];
-
-  const experiences = [
-    {
-      company: 'ICOSNET',
-      period: '07/2024 - Present',
-      role: 'Development and Application Engineer',
-      description: [
-        'Develop, and maintain web applications using various frameworks, ensuring optimal performance and scalability.',
-        'Troubleshooting application issues, creating technical documentation and monitoring application performance.'
-      ]
-    },
-    {
-      company: 'LogiTrans',
-      period: '06/2025 ',
-      role: 'DevOps Trainer',
-      description: [
-        'Conduct comprehensive training sessions on DevOps practices, tools, and methodologies to enhance team capabilities.',
-        'Develop training materials, hands-on labs, and real-world scenarios to ensure practical understanding and application of DevOps concepts.'
-      ]
-    },
-    {
-      company: 'Apollo Digital Solutions',
-      period: '06/2024 - 07/2024',
-      role: 'Fullstack developer',
-      description: [
-        'Design and implement web applications by building server-side logic and APIs while creating responsive front-end interfaces.',
-        'Managing databases, optimizing performance, overseeing deployment, and collaborating with cross-functional teams to deliver high-quality software solutions.'
-      ]
-    },
-    {
-      company: 'Remotely',
-      period: '2023 - present',
-      role: 'Full stack developer freelancer',
-      description: [
-        'Manage all aspects of my projects, including client communication, requirement gathering, and project scoping.',
-        'Design, develop, and deliver high-quality work within deadlines while maintaining a strong focus on client satisfaction.'
-      ]
-    }
-  ];
-
-  const education = [
-    {
-      degree: 'Engineer Degree in Network and Telecommunication Systems',
-      school: 'ENSTICP - Algiers, Algeria',
-      period: '2019 - 2024',
-      description: 'Specialized in networks, telecommunication,  cloud computing, telecommunications, and related technologies.'
-    }
-  ];
-
-  const skills = [
-    'HTML/CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js',
-    'Node.js', 'PHP', 'Laravel', 'Python', 'Express.js',
-    'Docker', 'Kubernetes', 'CI/CD', 'Jenkins',
-    'PostgreSQL', 'MongoDB', 'Redis', 'MySQL', 'Git', 'Linux'
-  ];
+  const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="min-h-screen pt-32 pb-16">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col lg:flex-row gap-12">
-          {/* Left Sidebar */}
-          <div className="lg:w-64 flex-shrink-0">
-            <nav className="space-y-2 sticky top-32">
-              {sections.map((section) => (
-                <button
-                  key={section.id}
-                  onClick={() => setActiveSection(section.id)}
-                  className={`block w-full text-left px-4 py-2 rounded-md transition-colors ${activeSection === section.id
-                    ? 'bg-muted text-foreground font-medium'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                    }`}
-                >
-                  {section.label}
-                </button>
+    <div className="min-h-screen bg-background">
+      <style>{`
+        @keyframes bounce-x {
+          0%, 100% { transform: translateX(0); }
+          50%       { transform: translateX(4px); }
+        }
+        .animate-bounce-x { animation: bounce-x 1.2s ease-in-out infinite; }
+      `}</style>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-24 pb-20">
+
+        {/* ── Profile card ────────────────────────────────────────────────── */}
+        <div className="flex flex-col sm:flex-row gap-6 mb-10">
+
+          {/* Avatar */}
+          <div className="flex-shrink-0 flex flex-col items-center sm:items-start gap-3">
+            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-muted ring-2 ring-border">
+              <img src="/avatar.jpeg" alt="Profile" className="w-full h-full object-cover" />
+            </div>
+            {/* Languages — compact pills */}
+            <div className="flex gap-1.5 flex-wrap justify-center sm:justify-start">
+              {['EN', 'FR', 'AR'].map(l => (
+                <span key={l} className="px-2 py-0.5 bg-muted rounded text-xs text-muted-foreground font-medium">{l}</span>
               ))}
-            </nav>
+            </div>
           </div>
 
-          {/* Main Content */}
-          <div className="flex-1">
-            {/* Profile Header */}
-            <div className="flex flex-col md:flex-row gap-8 mb-12">
-              <div className="flex-shrink-0">
-                <div className="w-48 h-48 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 overflow-hidden">
-                  <img
-                    src="/avatar.jpeg"
-                    alt="Profile"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+          {/* Info */}
+          <div className="flex-1 text-center sm:text-left">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Dernane Djilali</h1>
+            <p className="text-sm text-muted-foreground mt-1">Web Developer & DevOps Engineer</p>
 
-                <div className="mt-4 text-center">
-                  <div className="flex items-center justify-center space-x-1 text-muted-foreground mb-3">
-                    <MapPin className="w-4 h-4" />
-                    <span>Africa/Algiers</span>
-                  </div>
-
-                  <div className="flex justify-center space-x-2">
-                    <span className="px-3 py-1 bg-muted rounded-full text-sm">English</span>
-                    <span className="px-3 py-1 bg-muted rounded-full text-sm">French</span>
-                    <span className="px-3 py-1 bg-muted rounded-full text-sm">Arabic</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex-1">
-                <h1 className="text-5xl font-bold mb-2">Dernane Djilali</h1>
-                <p className="text-xl text-muted-foreground mb-6">Web Developer & DevOps Engineer</p>
-
-                <div className="flex flex-wrap gap-4 mb-6">
-                  <Button
-                    size="sm"
-                    onClick={() => setShowCVDownloadModal(true)}
-                  >
-                    <Download className="w-4 h-4 mr-2" />
-                    Download CV
-                  </Button>
-                  <Button variant="outline" size="sm" asChild>
-                    <a href="https://github.com/DJDERNANE" target="_blank" rel="noopener noreferrer">
-                      <Github className="w-4 h-4 mr-2" />
-                      GitHub
-                    </a>
-                  </Button>
-                  <Button variant="outline" size="sm" asChild>
-                    <a href="https://www.linkedin.com/in/djilali-dernane-8b1984218/" target="_blank" rel="noopener noreferrer">
-                      <Linkedin className="w-4 h-4 mr-2" />
-                      LinkedIn
-                    </a>
-                  </Button>
-                  <Button variant="outline" size="sm" asChild>
-                    <a href="mailto:djilali.dernane.contact@gmail.com">
-                      <Mail className="w-4 h-4 mr-2" />
-                      Email
-                    </a>
-                  </Button>
-                  {/* WhatsApp Button */}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    asChild
-
-                  >
-                    <a
-                      href="https://wa.me/213698764880" // replace with your WhatsApp number (without + or 0)
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="WhatsApp"
-                    >
-                      <MessageCircle className="w-5 h-5" />
-                      Whatsapp
-                    </a>
-                  </Button>
-                </div>
-
-                <p className="text-muted-foreground leading-relaxed">
-                  I am a Full-Stack Developer and DevOps Engineer with a passion for transforming complex problems into efficient, scalable web solutions. My work spans web development and interactive applications, ensuring seamless integration between design, development, and deployment.
-
-                  I specialize in building robust applications across the entire stack while also designing and managing the CI/CD pipelines, automation, and infrastructure that power reliable and scalable systems.
-                </p>
-              </div>
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-2 justify-center sm:justify-start">
+              <MapPin className="w-3.5 h-3.5" />
+              <span>Algiers, Algeria</span>
             </div>
 
-            {/* Dynamic Content Based on Active Section */}
-            {activeSection === 'introduction' && (
-              <div className="space-y-8">
-                <h2 className="text-3xl font-bold">Introduction</h2>
-                <div className="prose prose-lg max-w-none">
-                  <p className="text-muted-foreground leading-relaxed">
-                    Welcome to my professional portfolio. I am a passionate Full-Stack Developer and DevOps Engineer
-                    specialized in building modern, scalable, and high-performance web applications. I focus on
-                    transforming complex ideas into reliable digital solutions that deliver real value.
-                  </p>
-
-                  <p className="text-muted-foreground leading-relaxed">
-                    My expertise covers the full development lifecycle — from designing intuitive user interfaces
-                    and developing robust backend systems to implementing cloud infrastructure, CI/CD pipelines,
-                    and automation workflows. I enjoy solving challenging problems and building efficient systems
-                    that are secure, maintainable, and scalable.
-                  </p>
-
-                  <p className="text-muted-foreground leading-relaxed">
-                    I am always exploring new technologies and best practices to improve performance, streamline
-                    development processes, and create impactful products that combine innovation with reliability.
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {activeSection === 'experience' && (
-              <div className="space-y-8">
-                <h2 className="text-3xl font-bold">Clients & Experiences</h2>
-                <div className="space-y-8">
-                  {experiences.map((exp, index) => (
-                    <div key={index} className="border-b border-border pb-8 last:border-b-0">
-                      <div className="flex justify-between items-start mb-4">
-                        <div>
-                          <h3 className="text-xl font-semibold">{exp.company}</h3>
-                          <p className="text-accent">{exp.role}</p>
-                        </div>
-                        <span className="text-muted-foreground">{exp.period}</span>
-                      </div>
-                      <ul className="space-y-2">
-                        {exp.description.map((item, i) => (
-                          <li key={i} className="flex items-start">
-                            <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            <span className="text-muted-foreground">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {activeSection === 'studies' && (
-              <div className="space-y-8">
-                <h2 className="text-3xl font-bold">Studies</h2>
-                <div className="space-y-6">
-                  {education.map((edu, index) => (
-                    <div key={index} className="border-b border-border pb-6 last:border-b-0">
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-semibold">{edu.degree}</h3>
-                        <span className="text-muted-foreground">{edu.period}</span>
-                      </div>
-                      <p className="text-accent mb-2">{edu.school}</p>
-                      <p className="text-muted-foreground">{edu.description}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {activeSection === 'skills' && (
-              <div className="space-y-8">
-                <h2 className="text-3xl font-bold">Technical Skills</h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                  {skills.map((skill, index) => (
-                    <div key={index} className="px-3 py-2 bg-muted rounded-md text-center text-sm">
-                      {skill}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+            {/* Action links */}
+            <div className="mt-4 flex flex-wrap gap-2 justify-center sm:justify-start">
+              <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={() => setShowModal(true)}>
+                <Download className="w-3.5 h-3.5" />
+                Download CV
+              </Button>
+              <Button variant="outline" size="sm" className="gap-1.5 h-8 text-xs" asChild>
+                <a href="https://github.com/DJDERNANE" target="_blank" rel="noopener noreferrer">
+                  <Github className="w-3.5 h-3.5" />
+                  GitHub
+                </a>
+              </Button>
+              <Button variant="outline" size="sm" className="gap-1.5 h-8 text-xs" asChild>
+                <a href="https://www.linkedin.com/in/djilali-dernane-8b1984218/" target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="w-3.5 h-3.5" />
+                  LinkedIn
+                </a>
+              </Button>
+              <Button variant="outline" size="sm" className="gap-1.5 h-8 text-xs" asChild>
+                <a href="mailto:djilali.dernane.contact@gmail.com">
+                  <Mail className="w-3.5 h-3.5" />
+                  Email
+                </a>
+              </Button>
+              <Button variant="outline" size="sm" className="gap-1.5 h-8 text-xs" asChild>
+                <a href="https://wa.me/213698764880" target="_blank" rel="noopener noreferrer">
+                  <MessageCircle className="w-3.5 h-3.5" />
+                  WhatsApp
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
 
-        {/* CV Download Modal */}
-        <Dialog open={showCVDownloadModal} onOpenChange={setShowCVDownloadModal}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Select CV Version</DialogTitle>
-              <DialogDescription>Choose which language version you'd like to download</DialogDescription>
-            </DialogHeader>
-            <div className="space-y-3">
-              <Button
-                className="w-full justify-center"
-                asChild
+        {/* ── Tab nav ─────────────────────────────────────────────────────── */}
+        <div className="relative mb-8">
+          <div className="flex gap-1 overflow-x-auto scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 border-b border-border pb-0">
+            {sections.map(({ id, label, icon: Icon }) => (
+              <button
+                key={id}
+                onClick={() => setActiveSection(id)}
+                className={cn(
+                  'flex-shrink-0 flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap',
+                  activeSection === id
+                    ? 'border-primary text-foreground'
+                    : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
+                )}
               >
-                <a href="/cv-en.pdf" download="Dernane_Djilali_CV_English.pdf">
-                  <Download className="w-4 h-4 mr-2" />
-                  English Version
-                </a>
-              </Button>
-              <Button
-                className="w-full justify-center"
-                asChild
-              >
-                <a href="/cv-fr.pdf" download="Dernane_Djilali_CV_Francais.pdf">
-                  <Download className="w-4 h-4 mr-2" />
-                  Version Française
-                </a>
-              </Button>
+                <Icon className="w-3.5 h-3.5" />
+                {label}
+              </button>
+            ))}
+          </div>
+          {/* Swipe hint — only visible on small screens */}
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-background to-transparent sm:hidden" />
+          <div className="flex items-center justify-end gap-1 mt-1 sm:hidden">
+            <span className="text-[10px] text-muted-foreground/50">swipe</span>
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 text-muted-foreground/50 animate-bounce-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </div>
+        </div>
+
+        {/* ── Section content ─────────────────────────────────────────────── */}
+        <div className="min-h-[400px]">
+
+          {/* Introduction */}
+          {activeSection === 'introduction' && (
+            <div className="space-y-4 max-w-2xl">
+              <h2 className="text-xl font-semibold">About Me</h2>
+              <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+                <p>
+                  I'm a Full-Stack Developer and DevOps Engineer with a passion for transforming complex problems into efficient, scalable web solutions. My work spans web development and interactive applications, ensuring seamless integration between design, development, and deployment.
+                </p>
+                <p>
+                  I specialise in building robust applications across the entire stack while designing and managing CI/CD pipelines, automation, and infrastructure that power reliable and scalable systems.
+                </p>
+                <p>
+                  I'm always exploring new technologies and best practices to improve performance, streamline development processes, and create impactful products that combine innovation with reliability.
+                </p>
+              </div>
             </div>
-          </DialogContent>
-        </Dialog>
+          )}
+
+          {/* Experience */}
+          {activeSection === 'experience' && (
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold">Experience</h2>
+              <div className="space-y-0">
+                {experiences.map((exp, i) => (
+                  <div key={i} className="relative pl-6 pb-8 last:pb-0">
+                    {/* Timeline line */}
+                    <div className="absolute left-0 top-2 bottom-0 w-px bg-border last:hidden" />
+                    <div className="absolute left-[-3px] top-2 w-1.5 h-1.5 rounded-full bg-primary" />
+
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-2">
+                      <div>
+                        <h3 className="text-sm font-semibold">{exp.company}</h3>
+                        <p className="text-xs text-primary">{exp.role}</p>
+                      </div>
+                      <span className="text-xs text-muted-foreground flex-shrink-0">{exp.period}</span>
+                    </div>
+                    <ul className="space-y-1.5">
+                      {exp.description.map((item, j) => (
+                        <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground">
+                          <span className="w-1 h-1 rounded-full bg-muted-foreground/40 mt-1.5 flex-shrink-0" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Studies */}
+          {activeSection === 'studies' && (
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold">Education</h2>
+              <div className="space-y-0">
+                {education.map((edu, i) => (
+                  <div key={i} className="relative pl-6 pb-6 last:pb-0">
+                    <div className="absolute left-0 top-2 bottom-0 w-px bg-border last:hidden" />
+                    <div className="absolute left-[-3px] top-2 w-1.5 h-1.5 rounded-full bg-primary" />
+
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-1.5">
+                      <h3 className="text-sm font-semibold leading-snug max-w-sm">{edu.degree}</h3>
+                      <span className="text-xs text-muted-foreground flex-shrink-0">{edu.period}</span>
+                    </div>
+                    <p className="text-xs text-primary mb-1">{edu.school}</p>
+                    <p className="text-xs text-muted-foreground">{edu.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Skills */}
+          {activeSection === 'skills' && (
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold">Technical Skills</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {skillGroups.map(group => (
+                  <div key={group.label} className="space-y-2.5">
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{group.label}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {group.skills.map(skill => (
+                        <span
+                          key={skill}
+                          className="px-2.5 py-1 bg-muted rounded-md text-xs font-medium text-foreground"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+        </div>
       </div>
+
+      {/* CV Download Modal */}
+      <Dialog open={showModal} onOpenChange={setShowModal}>
+        <DialogContent className="sm:max-w-sm">
+          <DialogHeader>
+            <DialogTitle>Download CV</DialogTitle>
+            <DialogDescription>Choose which language version you'd like to download.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-2 pt-1">
+            <Button className="w-full gap-2" asChild>
+              <a href="/cv-en.pdf" download="Dernane_Djilali_CV_English.pdf">
+                <Download className="w-4 h-4" />
+                English Version
+              </a>
+            </Button>
+            <Button variant="outline" className="w-full gap-2" asChild>
+              <a href="/cv-fr.pdf" download="Dernane_Djilali_CV_Francais.pdf">
+                <Download className="w-4 h-4" />
+                Version Française
+              </a>
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
