@@ -63,7 +63,7 @@ const HeroSection = () => {
             {[
               { href: 'https://github.com/DJDERNANE', icon: Github, label: 'GitHub' },
               { href: 'https://www.linkedin.com/in/djilali-dernane-8b1984218/', icon: Linkedin, label: 'LinkedIn' },
-              { href: 'mailto:djilali.dernane.contact@gmail.com', icon: Mail, label: 'Email' },
+              { href: 'mailto:contact@dr-dev.tech', icon: Mail, label: 'Email' },
               { href: 'https://wa.me/213698764880', icon: MessageCircle, label: 'WhatsApp' },
             ].map(({ href, icon: Icon, label }) => (
               <a

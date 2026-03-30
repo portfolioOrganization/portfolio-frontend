@@ -5,7 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 
 const contactInfo = [
-  { icon: Mail,    label: 'Email',    value: 'djilali.dernane.contact@gmail.com', href: 'mailto:djilali.dernane.contact@gmail.com' },
+  { icon: Mail,    label: 'Email',    value: 'contact@dr-dev.tech', href: 'mailto:contact@dr-dev.tech' },
   { icon: Phone,   label: 'Phone',    value: '+213 698 764 880',                  href: 'tel:+213698764880' },
   { icon: MapPin,  label: 'Location', value: 'Remote / Algeria',                  href: null },
 ];

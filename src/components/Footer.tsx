@@ -17,7 +17,7 @@ const Footer = () => {
     { name: 'GitHub', icon: Github, url: 'https://github.com/DJDERNANE' },
     { name: 'LinkedIn', icon: Linkedin, url: 'https://www.linkedin.com/in/djilali-dernane-8b1984218/' },
     { name: 'WhatsApp', icon: MessageCircle , url: 'https://wa.me/213698764880' },
-    { name: 'Email', icon: Mail, url: 'mailto:djilali.dernane.contact@gmail.com' },
+    { name: 'Email', icon: Mail, url: 'mailto:contact@dr-dev.tech' },
   ];
 
   return (

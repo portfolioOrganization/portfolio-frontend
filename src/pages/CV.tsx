@@ -132,7 +132,7 @@ const CV = () => {
                 </a>
               </Button>
               <Button variant="outline" size="sm" className="gap-1.5 h-8 text-xs" asChild>
-                <a href="mailto:djilali.dernane.contact@gmail.com">
+                <a href="mailto:contact@dr-dev.tech">
                   <Mail className="w-3.5 h-3.5" />
                   Email
                 </a>
