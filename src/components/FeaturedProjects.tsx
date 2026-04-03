@@ -174,19 +174,21 @@ const FeaturedProjects = () => {
                       key={project.id}
                       className="pl-0 sm:pl-2 basis-full md:basis-1/2 xl:basis-1/3"
                     >
-                      <article className="group flex h-full flex-col rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-2 border-primary/30 bg-primary/[0.02] shadow-md shadow-primary/10">
+                      <article
+                        className="group flex h-full flex-col rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-2 border-primary/30 bg-primary/[0.02] shadow-md shadow-primary/10 cursor-zoom-in"
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`Open gallery for ${project.title}`}
+                        onClick={() => openGallery(project)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            openGallery(project);
+                          }
+                        }}
+                      >
                         <div
-                          className="relative aspect-video overflow-hidden bg-muted cursor-zoom-in"
-                          role="button"
-                          tabIndex={0}
-                          aria-label={`Open gallery for ${project.title}`}
-                          onClick={() => openGallery(project)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                              e.preventDefault();
-                              openGallery(project);
-                            }
-                          }}
+                          className="relative aspect-video overflow-hidden bg-muted"
                         >
                           {project.image && (
                             <img
@@ -251,6 +253,7 @@ const FeaturedProjects = () => {
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="flex-1 inline-flex items-center justify-center gap-1.5 h-8 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity"
+                                  onClick={(e) => e.stopPropagation()}
                                 >
                                   <ExternalLink className="w-3 h-3" />
                                   Demo
@@ -263,6 +266,7 @@ const FeaturedProjects = () => {
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="flex-1 inline-flex items-center justify-center gap-1.5 h-8 rounded-lg border border-border text-xs font-medium hover:bg-secondary transition-colors"
+                                  onClick={(e) => e.stopPropagation()}
                                 >
                                   <Github className="w-3 h-3" />
                                   Code
