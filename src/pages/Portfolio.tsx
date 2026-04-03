@@ -164,11 +164,21 @@ const Portfolio = () => {
             {filteredProjects.map(project => (
               <div
                 key={project.id}
+                role="button"
+                tabIndex={0}
+                aria-label={`Open gallery for ${project.title}`}
+                onClick={() => openGallery(project, 0)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openGallery(project, 0);
+                  }
+                }}
                 className={`group flex flex-col rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${
                   project.featured
                     ? 'border-2 border-primary/30 bg-primary/[0.02] shadow-md shadow-primary/10'
                     : 'border border-border bg-card'
-                }`}
+                } ${project.gallery_items.length > 0 ? 'cursor-zoom-in' : 'cursor-default'}`}
               >
                 {/* Image */}
                 <div className="relative aspect-video overflow-hidden bg-muted">
@@ -204,7 +214,10 @@ const Portfolio = () => {
                       {project.gallery_items.slice(0, 5).map((item, i) => (
                         <button
                           key={item.id}
-                          onClick={() => openGallery(project, i)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openGallery(project, i);
+                          }}
                           className="flex-shrink-0 w-10 h-10 rounded-md overflow-hidden border border-white/30 bg-black/20 relative group/thumb"
                         >
                           <img
@@ -216,7 +229,10 @@ const Portfolio = () => {
                       ))}
                       {project.gallery_items.length > 5 && (
                         <button
-                          onClick={() => openGallery(project, 5)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openGallery(project, 5);
+                          }}
                           className="flex-shrink-0 w-10 h-10 rounded-md border border-white/30 bg-black/50 flex items-center justify-center text-white text-[10px] font-semibold"
                         >
                           +{project.gallery_items.length - 5}
@@ -261,6 +277,7 @@ const Portfolio = () => {
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                           className="flex-1 inline-flex items-center justify-center gap-1.5 h-8 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity"
                         >
                           <ExternalLink className="w-3 h-3" />
@@ -272,6 +289,7 @@ const Portfolio = () => {
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                           className="flex-1 inline-flex items-center justify-center gap-1.5 h-8 rounded-lg border border-border text-xs font-medium hover:bg-secondary transition-colors"
                         >
                           <Github className="w-3 h-3" />
