@@ -1,10 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
+const toStorageUrl = (path) => {
+  if (!path) return '';
+  if (/^https?:\/\//i.test(path)) return path;
+  return `${import.meta.env.VITE_STORAGE_URL}${path}`;
+};
+
 const GalleryModal = ({ images, isOpen, onClose, initialIndex = 0 }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+
+  useEffect(() => {
+    if (isOpen) {
+      const safeIndex = Math.min(Math.max(initialIndex, 0), Math.max(images.length - 1, 0));
+      setCurrentIndex(safeIndex);
+    }
+  }, [isOpen, initialIndex, images.length]);
 
   const nextImage = () => {
     setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -18,8 +31,8 @@ const GalleryModal = ({ images, isOpen, onClose, initialIndex = 0 }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl h-[80vh] p-0 bg-black border-0">
-        <div className="relative h-full flex items-center justify-center">
+      <DialogContent className="max-w-4xl h-[80vh] p-0 bg-black border-0 overflow-hidden flex flex-col">
+        <div className="relative flex-1 min-h-0">
           {/* Close button */}
           <Button
             variant="ghost"
@@ -36,7 +49,7 @@ const GalleryModal = ({ images, isOpen, onClose, initialIndex = 0 }) => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute left-4 z-50 text-white hover:bg-white/20"
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-50 text-white hover:bg-white/20"
                 onClick={prevImage}
               >
                 <ChevronLeft className="w-8 h-8" />
@@ -44,7 +57,7 @@ const GalleryModal = ({ images, isOpen, onClose, initialIndex = 0 }) => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute right-4 z-50 text-white hover:bg-white/20"
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-50 text-white hover:bg-white/20"
                 onClick={nextImage}
               >
                 <ChevronRight className="w-8 h-8" />
@@ -53,17 +66,17 @@ const GalleryModal = ({ images, isOpen, onClose, initialIndex = 0 }) => {
           )}
 
           {/* Image display */}
-          <div className="relative w-full h-full flex items-center justify-center">
+          <div className="relative w-full h-full overflow-y-auto overflow-x-auto overscroll-contain px-4 py-14 sm:px-16">
             <img
-              src={`${import.meta.env.NEXT_PUBLIC_STORAGE_URL}${images[currentIndex].image_path}`}
+              src={toStorageUrl(images[currentIndex].image_path)}
               alt={images[currentIndex].caption || `Gallery image ${currentIndex + 1}`}
-              className="max-w-full max-h-full object-contain"
+              className="mx-auto h-auto max-w-full object-contain"
             />
             
             {/* Caption */}
             {images[currentIndex].caption && (
-              <div className="absolute bottom-4 left-0 right-0 text-center">
-                <p className="text-white bg-black/50 px-4 py-2 rounded-lg mx-auto inline-block">
+              <div className="sticky bottom-0 left-0 right-0 mt-4 pb-2 text-center bg-gradient-to-t from-black/65 to-transparent">
+                <p className="text-white bg-black/55 px-4 py-2 rounded-lg mx-auto inline-block max-w-[90%] break-words">
                   {images[currentIndex].caption}
                 </p>
               </div>

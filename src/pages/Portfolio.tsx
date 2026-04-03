@@ -11,7 +11,7 @@ const Portfolio = () => {
   const [selectedGallery, setSelectedGallery] = useState(null);
   const [galleryModalOpen, setGalleryModalOpen] = useState(false);
 
-  const categories = ['All', 'Web Development', 'DevOps', 'Full-Stack'];
+  const categories = ['All'];
 
   useEffect(() => {
     const fetchProjects = async () => {

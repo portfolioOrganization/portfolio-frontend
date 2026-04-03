@@ -60,7 +60,7 @@ const education = [
 
 const skillGroups = [
   { label: 'Frontend',      skills: ['HTML/CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js'] },
-  { label: 'Backend',       skills: ['Node.js', 'PHP', 'Laravel', 'Python', 'Express.js'] },
+  { label: 'Backend',       skills: ['Node.js', 'PHP', 'Laravel', 'Django', 'Express.js'] },
   { label: 'DevOps',        skills: ['Docker', 'Kubernetes', 'CI/CD', 'Jenkins', 'Linux'] },
   { label: 'Data & Tools',  skills: ['PostgreSQL', 'MongoDB', 'Redis', 'MySQL', 'Git'] },
 ];
@@ -92,7 +92,7 @@ const CV = () => {
 
           {/* Avatar */}
           <div className="flex-shrink-0 flex flex-col items-center sm:items-start gap-3">
-            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-muted ring-2 ring-border">
+            <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden bg-muted ring-2 ring-border">
               <img src="/avatar.jpeg" alt="Profile" className="w-full h-full object-cover" />
             </div>
             {/* Languages — compact pills */}
