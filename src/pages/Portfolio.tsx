@@ -42,6 +42,7 @@ const Portfolio = () => {
       : [],
     liveUrl: project.project_url,
     githubUrl: project.github_url,
+    isPublished: project.is_published,
     featured: project.is_published,
     status: project.is_published ? 'Live' : 'Draft',
     year: new Date(project.created_at).getFullYear().toString(),
@@ -270,19 +271,29 @@ const Portfolio = () => {
                     )}
                   </div>
 
-                  {(project.liveUrl || project.githubUrl) && (
+                  {(project.isPublished || project.githubUrl) && (
                     <div className="flex gap-2 pt-1">
-                      {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex-1 inline-flex items-center justify-center gap-1.5 h-8 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity"
+                      {project.isPublished ? (
+                        project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="flex-1 inline-flex items-center justify-center gap-1.5 h-8 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity"
+                          >
+                            <ExternalLink className="w-3 h-3" />
+                            Demo
+                          </a>
+                        )
+                      ) : (
+                        <button
+                          type="button"
+                          disabled
+                          className="flex-1 inline-flex items-center justify-center gap-1.5 h-8 rounded-lg bg-secondary text-muted-foreground text-xs font-medium cursor-not-allowed"
                         >
-                          <ExternalLink className="w-3 h-3" />
-                          Demo
-                        </a>
+                          Coming Soon
+                        </button>
                       )}
                       {project.githubUrl && (
                         <a

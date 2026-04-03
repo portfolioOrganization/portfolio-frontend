@@ -37,6 +37,7 @@ interface FormattedProject {
   tags: string[];
   link: string;
   github: string | null;
+  isPublished: boolean;
   galleryItems: GalleryItem[];
 }
 
@@ -85,6 +86,7 @@ const FeaturedProjects = () => {
               : [],
             link: p.project_url || '#',
             github: p.github_url || null,
+            isPublished: p.is_published,
             galleryItems: p.gallery_items || [],
           }))
         );
@@ -168,6 +170,7 @@ const FeaturedProjects = () => {
               <CarouselContent className="-ml-0 sm:-ml-2">
                 {projects.map((project) => {
                   const hasLiveLink = project.link && project.link !== '#';
+                  const showLiveDemo = project.isPublished && hasLiveLink;
 
                   return (
                     <CarouselItem
@@ -200,8 +203,12 @@ const FeaturedProjects = () => {
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
                           <div className="absolute top-3 left-3 flex gap-1.5">
-                            <Badge className="text-xs border backdrop-blur-sm bg-emerald-500/10 text-emerald-700 border-emerald-500/20">
-                              Live
+                            <Badge className={`text-xs border backdrop-blur-sm ${
+                              project.isPublished
+                                ? 'bg-emerald-500/10 text-emerald-700 border-emerald-500/20'
+                                : 'bg-gray-500/10 text-gray-600 border-gray-300'
+                            }`}>
+                              {project.isPublished ? 'Live' : 'Draft'}
                             </Badge>
                             <Badge className="text-xs bg-amber-400/90 text-amber-900 border-none backdrop-blur-sm gap-1">
                               <Star className="w-2.5 h-2.5 fill-amber-900" />
@@ -209,7 +216,7 @@ const FeaturedProjects = () => {
                             </Badge>
                           </div>
 
-                          {hasLiveLink && (
+                          {showLiveDemo && (
                             <a
                               href={project.link}
                               target="_blank"
@@ -245,9 +252,9 @@ const FeaturedProjects = () => {
                             )}
                           </div>
 
-                          {(hasLiveLink || project.github) && (
+                          {(showLiveDemo || project.github || !project.isPublished) && (
                             <div className="flex gap-2 pt-1">
-                              {hasLiveLink && (
+                              {showLiveDemo ? (
                                 <a
                                   href={project.link}
                                   target="_blank"
@@ -258,7 +265,15 @@ const FeaturedProjects = () => {
                                   <ExternalLink className="w-3 h-3" />
                                   Demo
                                 </a>
-                              )}
+                              ) : !project.isPublished ? (
+                                <button
+                                  type="button"
+                                  disabled
+                                  className="flex-1 inline-flex items-center justify-center gap-1.5 h-8 rounded-lg bg-secondary text-muted-foreground text-xs font-medium cursor-not-allowed"
+                                >
+                                  Coming Soon
+                                </button>
+                              ) : null}
 
                               {project.github && (
                                 <a
