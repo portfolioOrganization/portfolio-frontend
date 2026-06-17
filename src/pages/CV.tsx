@@ -12,8 +12,16 @@ import { cn } from '@/lib/utils';
 
 const experiences = [
   {
+    company: 'Djezzy',
+    period: '05/2026 – present',
+    role: 'Collaboration & Applications Development Engineer',
+    description: [
+        'Business requirements analysis, design and integration of collaborative solutions, application development, and process automation, while ensuring security, performance, and successful adoption of digital tools by end users.'  
+    ],
+  },
+  {
     company: 'ICOSNET',
-    period: '07/2024 – Present',
+    period: '07/2024 – 05/2026',
     role: 'Development and Application Engineer',
     description: [
       'Develop and maintain web applications using various frameworks, ensuring optimal performance and scalability.',
